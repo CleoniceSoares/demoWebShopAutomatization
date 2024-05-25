@@ -6,7 +6,6 @@ from pages.PageObject import PageObject
 class RegisterPage(PageObject):
 
     url_register = 'https://demowebshop.tricentis.com/register'
-    url_home_page = 'https://demowebshop.tricentis.com/'
     register_title_element = (By.CLASS_NAME, 'page-title')
     register_title_text = 'Register'
     gender_field = (By.ID, 'gender-male')
@@ -67,9 +66,6 @@ class RegisterPage(PageObject):
             EC.element_to_be_clickable(self.continue_button)
         )
         continue_button.click()
-
-    def is_url_home_page(self):
-        return self.is_url(self.url_home_page)
 
     def is_url_register_page(self):
         return self.is_url(self.url_register)
