@@ -1,6 +1,4 @@
 from pages.ContactUsPage import ContactUsPage
-from pages.WishListPage import WishListPage
-
 
 class Test009:
 

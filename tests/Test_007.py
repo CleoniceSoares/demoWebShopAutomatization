@@ -1,4 +1,4 @@
-from pages.jewerlyPage import JewerlyPage
+from pages.JewerlyPage import JewerlyPage
 
 
 class Test007:
