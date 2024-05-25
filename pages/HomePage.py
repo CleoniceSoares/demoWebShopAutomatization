@@ -20,6 +20,6 @@ class HomePage(PageObject):
     def is_url_home_page(self):
         return self.is_url(self.url)
 
-    def realizar_pesquisa_de_produto(self):
-        self.driver.find_element(*self.campo_search).send_keys('Science')
+    def realizar_pesquisa_de_produto(self, produto):
+        self.driver.find_element(*self.campo_search).send_keys(produto)
         self.driver.find_element(*self.botao_search).click()

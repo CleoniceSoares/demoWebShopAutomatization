@@ -7,5 +7,5 @@ class Test_Search_Products:
         home_page.open_home_page()
         search_page = SearchPage(home_page.driver)
 
-        home_page.realizar_pesquisa_de_produto()
+        home_page.realizar_pesquisa_de_produto('Science')
         search_page.verificar_resultado_da_pesquisa()

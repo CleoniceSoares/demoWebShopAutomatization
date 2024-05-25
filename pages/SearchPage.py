@@ -16,5 +16,7 @@ class SearchPage(PageObject):
         return self.is_url(self.url)
 
     def verificar_resultado_da_pesquisa(self):
-        self.driver.find_element(*self.imagem_produto).is_displayed()
-        self.driver.find_element(*self.titulo_produto).is_displayed()
+        produto_imagem = self.driver.find_element(*self.imagem_produto).is_displayed()
+        produto_titulo = self.driver.find_element(*self.titulo_produto).is_displayed()
+
+
