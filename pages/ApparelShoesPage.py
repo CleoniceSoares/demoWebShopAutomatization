@@ -15,7 +15,11 @@ class ApparelShoesPage(PageObject):
     display_per_page_select_four = (By.XPATH, "//option[@value='https://demowebshop.tricentis.com/apparel-shoes?pagesize=4']")
     apparel_shoes_title_element = (By.CLASS_NAME, 'page-title')
     apparel_shoes_title_text = 'Apparel & Shoes'
+    product_list_container = (By.CLASS_NAME, 'product-list')
     product_item_card = (By.CLASS_NAME, 'product-item')
+    select_display_mode_list = (By.ID, 'products-viewmode')
+    list_items = (By.CLASS_NAME, 'list-item')
+    modo_lista_value = "https://demowebshop.tricentis.com/apparel-shoes?viewmode=list"
 
     def __init__(self, driver):
         super(ApparelShoesPage, self).__init__(driver=driver)
@@ -38,6 +42,19 @@ class ApparelShoesPage(PageObject):
         )
         items = self.driver.find_elements(*self.product_item_card)
         if len(items) == 4:
+            return True
+        else:
+            return False
+
+    def selecionar_modo_lista(self):
+        select_element = self.driver.find_element(*self.select_display_mode_list)
+        select = Select(select_element)
+        select.select_by_value(self.modo_lista_value)
+
+    def verificar_modo_lista(self):
+        list_container = self.driver.find_element(*self.product_list_container)
+        product_items = list_container.find_elements(*self.product_item_card)
+        if len(product_items) > 0:
             return True
         else:
             return False
