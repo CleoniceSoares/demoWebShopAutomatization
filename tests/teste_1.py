@@ -26,7 +26,7 @@ class Teste1:
         assert register_page.tem_messagem_sucesso(), 'Mensagem de sucesso nao encontrada'
 
         register_page.clicar_botao_continue()
-        assert register_page.is_url_home_page(), 'URL da HomePage está incorreta!'
+        assert home_page.is_url_home_page(), 'URL da HomePage está incorreta!'
 
 
 
