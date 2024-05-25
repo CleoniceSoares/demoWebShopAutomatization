@@ -9,9 +9,8 @@ class Test_Add_to_Cart:
         home_page.open_home_page()
         search_page = SearchPage(home_page.driver)
 
-        home_page.realizar_pesquisa_de_produto('Fiction')
+        home_page.realizar_pesquisa_de_produto('3rd Album')
         search_page.clicar_em_AddToCart()
-        search_page.verificar_mensagem()
-        #search_page.acessar_carrinho()
-        time.sleep(10)
+        assert search_page.verificar_mensagem()
+
 
