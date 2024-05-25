@@ -18,5 +18,8 @@ class PageObject:
     def is_url(self, url):
         return self.driver.current_url == url
 
+    def clicar_menu(self, by, menu):
+        self.driver.find_element(by, menu).click()
+
     def close(self):
         self.driver.quit()
