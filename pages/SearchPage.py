@@ -1,11 +1,10 @@
 from selenium.webdriver.support import expected_conditions as EC
-
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-
+from selenium.webdriver.support.ui import WebDriverWait
 from pages.PageObject import PageObject
-class SearchPage(PageObject):
 
+
+class SearchPage(PageObject):
     url = 'https://demowebshop.tricentis.com/search?q=Science'
     imagem_produto = (By.CSS_SELECTOR, '[title="Show details for Science"]')
     titulo_produto = (By.CLASS_NAME, 'product-title')
@@ -13,6 +12,9 @@ class SearchPage(PageObject):
     botao_AddToCart = (By.CSS_SELECTOR, '[value="Add to cart"]')
     carrinho = (By.CLASS_NAME, 'cart-qty')
     qtd_itens = '(1)'
+    link_carrinho = (By.CLASS_NAME, 'button-1 cart-button')
+    nome_carrinho = 'Shopping cart'
+    link_carrinho_texto = (By.LINK_TEXT, 'Shopping cart')
 
     def __init__(self, driver):
         self.driver = driver
@@ -30,17 +32,28 @@ class SearchPage(PageObject):
         return visualizar_descricao_produto and visualizar_imagem_produto
 
     def clicar_em_AddToCart(self):
-        self.driver.find_element(*self.botao_AddToCart).click()
+        botao_add = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable(self.botao_AddToCart)
+        )
+        botao_add.click()
 
-    def verificar_mensagem(self):
+    def verificar_inclusao(self):
         carrinho_element = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(self.carrinho)
         )
 
-        visualizar_mensagem = carrinho_element.is_displayed()
-        verificar_texto = carrinho_element.text == self.qtd_itens
+        WebDriverWait(self.driver, 10).until(
+            lambda driver: carrinho_element.text == self.qtd_itens
+        )
 
-        return visualizar_mensagem and verificar_texto
+        carrinho_atualizado = carrinho_element.is_displayed()
+        qtd_produto = carrinho_element.text == self.qtd_itens
+
+        return carrinho_atualizado and qtd_produto
 
     def acessar_carrinho(self):
-        carrinho_qtd_itens = self.driver.find_element(*self.qtd_itens)
+        meu_carrinho = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(self.link_carrinho_texto)
+        )
+
+        meu_carrinho.click()
